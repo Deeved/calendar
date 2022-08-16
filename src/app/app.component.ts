@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Day } from "./Helpers/Day";
+import { Month } from "./Helpers/Month";
 
 @Component({
   selector: "app-root",
@@ -24,6 +25,9 @@ export class AppComponent implements OnInit {
     console.log("-- timestamp", day.timestamp);
     console.log("-- weekNumber", day.weekNumber);
     console.log("-- isToday", day.isToday);
-    console.log("--  day", day.format("MMM DD (DDDD/WW), YYYY"));
+    console.log("-- day", day.format("MMM DD (DDDD/WW), YYYY"));
+
+    const month = new Month();
+    console.log(month);
   }
 }

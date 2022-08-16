@@ -1,8 +1,8 @@
 export class Day {
   January = 0;
   FirstDayOfTheYear = 1;
-  dayInMilliseconds = 86400000;
-  totalDaysOfTheWeek = 7;
+  DayInMilliseconds = 86400000;
+  TotalDaysOfTheWeek = 7;
 
   constructor(private date: Date = null, private lang = "default") {
     date ? (this.date = date) : (this.date = new Date());
@@ -56,11 +56,11 @@ export class Day {
       this.FirstDayOfTheYear
     );
     const pastDaysOfYear =
-      (this.timestamp - firstDayOfTheYear.getTime()) / this.dayInMilliseconds;
+      (this.timestamp - firstDayOfTheYear.getTime()) / this.DayInMilliseconds;
 
     return Math.ceil(
       (pastDaysOfYear + firstDayOfTheYear.getDay() + 1) /
-        this.totalDaysOfTheWeek
+        this.TotalDaysOfTheWeek
     );
   }
 
