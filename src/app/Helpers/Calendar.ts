@@ -18,9 +18,7 @@ export class Calendar {
   ) {
     this.today = new Day(null, lang);
 
-    if (!year) {
-      this.year = this.today.year;
-    }
+    this.year = year ? year: this.today.year;
 
     this.month = new Month(
       new Date(this.year, (this.monthNumber || this.today.monthNumber) - 1),

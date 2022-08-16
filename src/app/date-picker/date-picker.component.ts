@@ -15,15 +15,11 @@ export class DatePickerComponent implements OnInit {
   date: Day;
   monthYear: string;
   calendar: Calendar;
+  lang: string = null
 
   constructor() {
-    const lang = window.navigator.language;
-    console.log(lang);
-
-    const date = this.date ? new Date(this.dateLabel) : new Date();
-
-    this.date = new Day(date, lang);
-    this.calendar = new Calendar(this.date.year, this.date.monthNumber, lang);
+    this.lang = window.navigator.language;
+    console.log(this.lang);
   }
 
   toggle() {
@@ -31,10 +27,15 @@ export class DatePickerComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.date);
-
+    const date = this.dateLabel ? new Date(this.dateLabel) : new Date();  
+    
+    this.date = new Day(date, this.lang);
+    
+    this.calendar = new Calendar(this.date.year, this.date.monthNumber, this.lang);
+        
     this.dateLabel = this.date.format(this.format);
-
+    
     this.monthYear = `${this.calendar.month.name}, ${this.calendar.year}`;
+    
   }
 }
