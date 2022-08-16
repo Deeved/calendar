@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Calendar } from "./Helpers/Calendar";
 import { Day } from "./Helpers/Day";
 import { Month } from "./Helpers/Month";
 
@@ -9,8 +10,10 @@ import { Month } from "./Helpers/Month";
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {
-    const day = new Day(new Date("2021-02-07T03:00:00"));
+    const day = new Day();
 
     const month = new Month();
+
+    const cal = new Calendar();
   }
 }

@@ -1,0 +1,14 @@
+<button type="button" class="date-toggle" (click)="toggle()">
+  {{dateLabel}}
+</button>
+<ng-container *ngIf="visible" class="calendar">
+  <div class="calendar">
+    <div class="header">
+      <button type="button" class="prev-month" aria-label="previous month"><</button>
+      <h4>
+        {{monthYear}}
+      </h4>
+      <button type="button" class="next-month" aria-label="previous month">></button>
+    </div>
+  </div>
+</ng-container>

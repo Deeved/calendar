@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+}
+button {
+  position: relative;
+  font-family: sans-serif;  
+  
+  &.date-toggle {
+    padding: 8px 15px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #eee;
+    color: #333;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+}
+
+.calendar{
+  display: flex;
+}
