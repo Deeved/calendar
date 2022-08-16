@@ -1,4 +1,5 @@
 import { Day } from "./Day";
+import { isLeapYear } from "./isLeapYear";
 
 export class Month {
   day: Day;
@@ -19,7 +20,7 @@ export class Month {
     this.numberOfDays = this.MonthsSize[this.number - 1];
 
     if (this.number === this.February) {
-      this.numberOfDays += this.isLeapYear(this.day) ? 1 : 0;
+      this.numberOfDays += isLeapYear(this.year) ? 1 : 0;
     }
 
     this[Symbol.iterator] = function* () {
@@ -34,9 +35,5 @@ export class Month {
 
   getDay(date) {
     return new Day(new Date(this.year, this.number - 1, date), this.lang);
-  }
-
-  isLeapYear(year) {
-    return year % 100 === 0 ? year % 400 === 0 : year % 4 === 0;
   }
 }
