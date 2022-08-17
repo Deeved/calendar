@@ -21,17 +21,17 @@
       ></button>
     </div>
 
-    <div class="week-days" >
+    <div class="week-days" id="week-days">
       <span *ngFor="let weeKDay of getWeekDaysElementStrings()">
         {{weeKDay}}
       </span>
     </div>
-    <div class="month-days">
-      <button 
+    <div class="month-days" id="month-days">
+      <!-- <button 
         class="month-day" 
         *ngFor="let day of updateMonthDays()">
         {{day['date']}}
-      </button>
+      </button> -->
     </div>
   </div>
 </ng-container>
