@@ -1,7 +1,7 @@
-<button type="button" class="date-toggle" (click)="toggle()">
+<button  class="date-toggle" (click)="toggle()">
   {{dateLabel}}
 </button>
-<ng-container *ngIf="visible">
+<div id="calendar">
   <div class="calendar-dropdown" id="calendar-dropdown">
     <div class="header">
       <button 
@@ -34,4 +34,4 @@
       </button> -->
     </div>
   </div>
-</ng-container>
+</div>

@@ -24,19 +24,20 @@ export class DatePickerComponent implements OnInit {
   }
 
   toggle() {
-    if (!this.visible) {
-      this.isCurrentCalendarMonth();
-
-      this.calendar.goToDate(this.date.monthNumber, this.date.year);
-      this.updatedMonthYear();
-    }
-
     this.visible = !this.visible;
+    this.isCurrentCalendarMonth();
+    this.calendar.goToDate(this.date.monthNumber, this.date.year);
+    this.renderCalendarDays();
+
+    if (this.visible) {
+      document.getElementById("calendar").style.display = "block";
+    } else {
+      document.getElementById("calendar").style.display = "none";
+    }
   }
 
   ngOnInit() {
     const date = this.dateLabel ? new Date(this.dateLabel) : new Date();
-
     this.date = new Day(date, this.lang);
 
     this.calendar = new Calendar(
@@ -46,27 +47,17 @@ export class DatePickerComponent implements OnInit {
     );
 
     this.dateLabel = this.date.format(this.format);
-
-    this.monthYear = `${this.calendar.month.name}, ${this.calendar.year}`;
-
-    // document.addEventListener('click', (e) => this.handleClickOut(e))
-    // const calendar = document.getElementById('calendar');
-    // console.log(calendar);
-    // if(calendar) {
-    //   this.calendarElement = calendar
-    //   this.calendarElement.addEventListener('click', (e) => this.handleClickOut(e))
-    // }
-    this.updateMonthDays();
+    this.renderCalendarDays();
   }
 
   previousMonth() {
     this.calendar.goToPreviousMonth();
-    this.updatedMonthYear();
+    this.renderCalendarDays();
   }
 
   nextMonth() {
     this.calendar.goToNextMonth();
-    this.updatedMonthYear();
+    this.renderCalendarDays();
   }
 
   updatedMonthYear() {
@@ -81,8 +72,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   handleClickOut(e) {
-    console.log(this);
-
+    // console.log(this);
     // console.log(e.target);
   }
 
@@ -94,6 +84,7 @@ export class DatePickerComponent implements OnInit {
 
   getMonthDaysGrid() {
     const firstDayOfTheMonth = this.calendar.month.getDay(1);
+    const prevMonth = this.calendar.getPreviousMonth();
     const totalLastMonthFinalDays = firstDayOfTheMonth.dayNumber - 1;
     const totalDays =
       this.calendar.month.numberOfDays + totalLastMonthFinalDays;
@@ -105,13 +96,15 @@ export class DatePickerComponent implements OnInit {
       );
     }
 
+    for (let i = 0; i < totalLastMonthFinalDays; i++) {
+      const inverted = totalLastMonthFinalDays - (i + 1);
+      monthList[i] = prevMonth.getDay(prevMonth.numberOfDays - inverted);
+    }
+
     return monthList;
   }
 
   updateMonthDays() {
-    // return (this.getMonthDaysGrid() as unknown as Day[]).map( day => {
-    //   return day ? day : ''
-    // })
     setTimeout(() => {
       const monthDaysElement = document.getElementById("month-days");
       monthDaysElement.innerHTML = "";
@@ -143,9 +136,6 @@ export class DatePickerComponent implements OnInit {
 
   selectDay(el, day) {
     if (!day) return;
-    console.log(day, this.date);
-
-    if (day.isEqualTo(this.date)) return;
 
     this.date = day;
 
@@ -157,8 +147,9 @@ export class DatePickerComponent implements OnInit {
       this.selectedDayElement = el;
     }
 
-    this.toggle();
+    this.dateLabel = day.format(this.format);
     this.updateMonthDays();
+    this.toggle();
   }
 
   isSelectedDate(date) {
@@ -167,5 +158,10 @@ export class DatePickerComponent implements OnInit {
       date.monthNumber === this.date.monthNumber &&
       date.year === this.date.year
     );
+  }
+
+  renderCalendarDays() {
+    this.updatedMonthYear();
+    this.updateMonthDays();
   }
 }
