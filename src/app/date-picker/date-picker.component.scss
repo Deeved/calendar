@@ -5,6 +5,7 @@
   align-items: center;
   font-family: sans-serif;  
 }
+
 button {
   &.date-toggle {
     padding: 8px 15px;
@@ -19,6 +20,10 @@ button {
     cursor: pointer;
     text-transform: capitalize;
   }
+}
+
+#calendar {
+  display: none;
 }
 
 .calendar-dropdown{

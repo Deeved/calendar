@@ -9,7 +9,6 @@ import { Day } from "../Helpers/Day";
 })
 export class DatePickerComponent implements OnInit {
   @Input() format = "MMM DD, YYYY";
-  @Input() position: "bottom";
   @Input() visible = false;
   @Input() dateLabel: string;
   date: Day;
@@ -48,6 +47,10 @@ export class DatePickerComponent implements OnInit {
 
     this.dateLabel = this.date.format(this.format);
     this.renderCalendarDays();
+
+    if (this.visible) {
+      document.getElementById("calendar").style.display = "block";
+    }
   }
 
   previousMonth() {
