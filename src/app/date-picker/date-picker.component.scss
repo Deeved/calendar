@@ -73,4 +73,35 @@ button {
       text-transform: capitalize;
     }
   }
+
+  & div.month-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+
+    & button.month-day {
+      padding: 8px 5px;
+      background: #c7c9d3;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 2px;
+      cursor: pointer;
+      border: none;
+
+      &.current {
+        background: #444857;
+      }
+
+      &.selected {
+        background: #28a5a7;
+        color: #ffffff;
+      }
+
+      &.month-day:hover {
+        background: #34bd61;
+      }
+    }
+  }
 }

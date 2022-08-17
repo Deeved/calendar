@@ -20,7 +20,6 @@ export class DatePickerComponent implements OnInit {
 
   constructor() {
     this.lang = window.navigator.language;
-    console.log(this.lang);
   }
 
   toggle() {
@@ -52,8 +51,6 @@ export class DatePickerComponent implements OnInit {
     //   this.calendarElement = calendar
     //   this.calendarElement.addEventListener('click', (e) => this.handleClickOut(e))
     // }
-
-    console.log(this.calendar.weekDays);
     
   }
 
@@ -87,4 +84,28 @@ export class DatePickerComponent implements OnInit {
       .map((weekDay) => `${(weekDay as string).substring(0, 3)}`)
   }
 
+  getMonthDaysGrid() {
+    const firstDayOfTheMonth = this.calendar.month.getDay(1);
+    const totalLastMonthFinalDays = firstDayOfTheMonth.dayNumber - 1
+    const totalDays = this.calendar.month.numberOfDays + totalLastMonthFinalDays;
+    const monthList = Array.from({length: totalDays});
+
+    for(let i = totalLastMonthFinalDays; i < totalDays; i++) {
+      monthList[i] = this.calendar.month.getDay(i + 1 - totalLastMonthFinalDays)
+    }
+
+    return monthList;
+  }
+
+  updateMonthDays() {
+    return (this.getMonthDaysGrid() as unknown as Day[]).map( day => {
+      return day ? day : ''
+    })
+  }
+
+  isSelectedDate(date) {
+    return date.date === this.date.date &&
+      date.monthNumber === this.date.monthNumber &&
+      date.year === this.date.year;
+  }
 }

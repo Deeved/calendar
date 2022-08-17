@@ -26,5 +26,12 @@
         {{weeKDay}}
       </span>
     </div>
+    <div class="month-days">
+      <button 
+        class="month-day" 
+        *ngFor="let day of updateMonthDays()">
+        {{day['date']}}
+      </button>
+    </div>
   </div>
 </ng-container>
