@@ -16,6 +16,7 @@ export class DatePickerComponent implements OnInit {
   monthYear: string;
   calendar: Calendar;
   lang: string = null
+  calendarElement: HTMLElement;
 
   constructor() {
     this.lang = window.navigator.language;
@@ -23,6 +24,13 @@ export class DatePickerComponent implements OnInit {
   }
 
   toggle() {
+    if(!this.visible) {
+      this.isCurrentCalendarMonth()
+
+      this.calendar.goToDate(this.date.monthNumber, this.date.year);
+      this.updatedMonthYear();      
+    }
+
     this.visible = !this.visible;
   }
 
@@ -35,7 +43,48 @@ export class DatePickerComponent implements OnInit {
         
     this.dateLabel = this.date.format(this.format);
     
-    this.monthYear = `${this.calendar.month.name}, ${this.calendar.year}`;
+    this.monthYear = `${this.calendar.month.name}, ${this.calendar.year}`; 
+
+    // document.addEventListener('click', (e) => this.handleClickOut(e))
+    // const calendar = document.getElementById('calendar');
+    // console.log(calendar);
+    // if(calendar) {
+    //   this.calendarElement = calendar
+    //   this.calendarElement.addEventListener('click', (e) => this.handleClickOut(e))
+    // }
+
+    console.log(this.calendar.weekDays);
     
   }
+
+  previousMonth() {
+    this.calendar.goToPreviousMonth()
+    this.updatedMonthYear()
+  }
+
+  nextMonth() {
+    this.calendar.goToNextMonth()
+    this.updatedMonthYear()
+  }
+
+  updatedMonthYear() {
+    this.monthYear = `${this.calendar.month.name}, ${this.calendar.year}`
+  }
+  
+  isCurrentCalendarMonth() {
+    return this.calendar.month.number === this.date.monthNumber && 
+      this.calendar.year === this.date.year
+  }
+
+  handleClickOut(e) {
+    console.log(this);
+    
+    // console.log(e.target);
+  } 
+  
+  getWeekDaysElementStrings() {
+    return this.calendar.weekDays
+      .map((weekDay) => `${(weekDay as string).substring(0, 3)}`)
+  }
+
 }

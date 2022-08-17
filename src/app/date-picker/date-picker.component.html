@@ -1,14 +1,30 @@
 <button type="button" class="date-toggle" (click)="toggle()">
   {{dateLabel}}
 </button>
-<ng-container *ngIf="visible" class="calendar">
-  <div class="calendar">
+<ng-container *ngIf="visible">
+  <div class="calendar-dropdown" id="calendar-dropdown">
     <div class="header">
-      <button type="button" class="prev-month" aria-label="previous month"><</button>
-      <h4>
+      <button 
+        type="button" 
+        class="prev-month" 
+        aria-label="previous month"
+        (click)="previousMonth()"
+        ></button>
+      <label>
         {{monthYear}}
-      </h4>
-      <button type="button" class="next-month" aria-label="previous month">></button>
+      </label>
+      <button 
+        type="button" 
+        class="next-month" 
+        aria-label="previous month"
+        (click)="nextMonth()"
+      ></button>
+    </div>
+
+    <div class="week-days" >
+      <span *ngFor="let weeKDay of getWeekDaysElementStrings()">
+        {{weeKDay}}
+      </span>
     </div>
   </div>
 </ng-container>

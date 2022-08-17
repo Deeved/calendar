@@ -1,12 +1,11 @@
 :host {
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;  
 }
 button {
-  position: relative;
-  font-family: sans-serif;  
-  
   &.date-toggle {
     padding: 8px 15px;
     border: none;
@@ -22,6 +21,56 @@ button {
   }
 }
 
-.calendar{
-  display: flex;
+.calendar-dropdown{
+  width: 300px;
+  margin: 10px 0 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+
+  & div.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & label {
+      font-size: 21px;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    & button {
+      padding: 0;
+      border: 8px solid transparent;
+      width: 0;
+      height: 0;
+      border-radius: 2px;
+      border-top-color: #222;
+      transform: rotate(90deg);
+      cursor: pointer;
+      background: none;
+      position: relative;
+    }
+
+    & button:last-of-type {
+      transform: rotate(-90deg);
+    }
+  }
+
+  & div.week-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    margin: 10px;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+      text-transform: capitalize;
+    }
+  }
 }
