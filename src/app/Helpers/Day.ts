@@ -46,8 +46,8 @@ export class Day {
     return this.isEqualTo(new Date());
   }
 
-  isEqualTo(date: Date) {
-    date = date instanceof Day ? date.date : date;
+  isEqualTo(date) {
+    date = date instanceof Day ? date.Date : date;
 
     return (
       date.getDate() === date.getDate() &&
